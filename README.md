@@ -8,3 +8,6 @@ ECC(Elliptic Curve Crypto) implementation learned in Advanced Cryptography and P
 
 ----
   ![Image](https://github.com/user-attachments/assets/6394d66e-782e-4c10-8919-666f5ac0cd1c)
+
+---
+다음에 만들어 볼 거: 논문 참고해서 224비트 ECDSA 모듈 만들기
