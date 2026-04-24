@@ -1,0 +1,54 @@
+# 파일 구조 (전부 구현하고 나중에 변경 필요)
+
+```
+project/
+├── main.c                # 전체 테스트 및 통합 실행부
+├── Makefile              # 컴파일 자동화 스크립트
+│
+├── core/                 # [1단계] 최하위 산술 연산
+│   ├── bignum.h / .c     # 거대 정수(Big Number) 연산기
+│   └── sha256.h / .c     # SHA-256 해시 함수
+│
+├── crypto/               # [2단계] 타원 곡선 수학
+│   ├── ecc_point.h / .c   # secp256k1 점 연산 (Point Add/Double/Mul)
+│   └── csprng.h / .c     # 암호학적 난수 생성기
+│
+└── protocols/            # [3단계] 상위 암호 프로토콜
+    ├── ecdsa.h / .c      # 서명 생성 및 검증 로직
+    └── ecdh.h / .c       # 공유 비밀 키 교환 로직
+```
+
+# 각 파일별 역할
+## Core 연산 계층
+- `big_int.h / .c`: 이미 구현한 큰 수 연산기
+- `sha256.h / .c`: ECDSA의 메시지 해싱, ECDH의 키 유도 과정에서 사용
+
+## Crypto 계층
+- `ecc_point.h / .c`: big_int로 타원 곡선 수식 풀이
+    - 이 파일만 잘 만들면 ECDSA와 ECDH가 이 모듈을 공유
+    - secp256k1 곡선에서의 연산 함수 중심
+- `csprng.h / .c`: 시스템의 엔트로피를 가져와 난수 생성
+
+## Protocol 계층
+- `ecdsa.h / .c`: `ecc_point`로 서명 생성 및 검증 수행
+- `ecdh.h / .c`: `ecc_point`로 키 교환 수행 (키 유도 포함)
+
+# 파일 분리 시 핵심
+중복 포함(Redefinition) 방지로, 모든 헤더 파일에 반드시 다음처럼 가드 사용
+
+```
+// ecdh.h 예시
+#ifndef SECP256K1_ECDH_H
+#define SECP256K1_ECDH_H
+
+#include "ecc_core.h"
+#include "sha256.h"
+
+// ECDH 전용 함수 선언
+int ecdh_compute_key(uint8_t *out_key, const uint8_t *priv_key, const uint8_t *peer_pub_key);
+
+#endif
+```
+
+# 컴파일 및 관리 방법
+파일이 많아지면 매번 gcc로 하나씩 컴파일하기 어려우니, Makefile을 만들어 `make` 명령어 한 줄로 컴파일
