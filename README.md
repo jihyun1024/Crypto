@@ -23,7 +23,7 @@ DES 암호화 알고리즘의 구현입니다.
 - **Data_Encryption_Standard.cpp**: DES 암호화/복호화의 완전한 구현 (초기 순열, 확장, S-박스, P-박스 등 포함)
 
 ### Elliptic_Curve_Crypto (타원 곡선 암호화)
-타원 곡선 기반 암호화 알고리즘들의 구현입니다. 교육용 토이 예제와 실제 표준 곡선 구현이 포함됩니다.
+ECC(Elliptic Curve Crypto) implementation learned in Advanced Cryptography and Practice (Kookmin University)
 
 - **Addition Table.cpp / Addition Table.h**: 타원 곡선 덧셈 테이블 생성 (Toy Example)
 - **Inverse_Table.cpp**: GF(2^4) 필드의 역원 테이블 생성
