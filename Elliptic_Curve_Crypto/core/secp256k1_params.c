@@ -1,6 +1,7 @@
 #include "ecc_point.h"
+#include "secp256k1_params.h"
 
-// secp256k1 parameter initialization
+// secp256k1 parameter initialization (p, n, Gx, Gy를 한 번에 초기화)
 void secp256k1_init_params() {
     // p = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
     big_int_from_hex_string(&secp256k1_p, "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F");
