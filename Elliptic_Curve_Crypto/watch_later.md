@@ -6,16 +6,17 @@ project/
 ├── Makefile              # 컴파일 자동화 스크립트
 │
 ├── core/                 # [1단계] 최하위 산술 연산
-│   ├── bignum.h / .c     # 거대 정수(Big Number) 연산기
-│   └── sha256.h / .c     # SHA-256 해시 함수
+│   ├── bignum.h / .c    
+│   └── sha256.h / .c     
 │
 ├── crypto/               # [2단계] 타원 곡선 수학
-│   ├── ecc_point.h / .c   # secp256k1 점 연산 (Point Add/Double/Mul)
-│   └── csprng.h / .c     # 암호학적 난수 생성기
+│   ├── ecc_point.h / .c  
+│   ├── csprng.h / .c    
+|   └── cng_rng.h / .c   
 │
 └── protocols/            # [3단계] 상위 암호 프로토콜
-    ├── ecdsa.h / .c      # 서명 생성 및 검증 로직
-    └── ecdh.h / .c       # 공유 비밀 키 교환 로직
+    ├── ecdsa.h / .c      
+    └── ecdh.h / .c       
 ```
 
 # 각 파일별 역할
@@ -25,13 +26,14 @@ project/
 
 ## Crypto 계층
 - `ecc_point.h / .c`: big_int로 타원 곡선 수식 풀이
-    - 이 파일만 잘 만들면 ECDSA와 ECDH가 이 모듈을 공유
-    - secp256k1 곡선에서의 연산 함수 중심
-- `csprng.h / .c`: 시스템의 엔트로피를 가져와 난수 생성
+    - ECDSA와 ECDH가 이 모듈을 공유
+    - secp256k1 곡선에서의 연산 함수를 중심으로 구현
+- `csprng.h / .c`: 직접 구현한 난수 생성 기능
+- `cng_rng./ .c`: CNG(Cryptography Next Generation)을 이용한 난수 생성 (MSVC 환경에서만 동작)
 
 ## Protocol 계층
-- `ecdsa.h / .c`: `ecc_point`로 서명 생성 및 검증 수행
-- `ecdh.h / .c`: `ecc_point`로 키 교환 수행 (키 유도 포함)
+- `ecdsa.h / .c`: ECDSA 알고리즘으로 서명 생성 및 검증 수행
+- `ecdh.h / .c`: ECDH 알고리즘으로 키 교환 수행 (키 유도 포함)
 
 # 파일 분리 시 핵심
 중복 포함(Redefinition) 방지로, 모든 헤더 파일에 반드시 다음처럼 가드 사용
