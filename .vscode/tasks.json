@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C/C++ Compile Run: Compile",
+            "type": "shell",
+            "command": "${workspaceFolder}/../../../TDM-GCC/bin/gcc.exe",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-g3",
+                "${file}",
+                "-o",
+                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "C/C++ Compile Run: Compile with big_int (cng_rng)",
+            "type": "shell",
+            "command": "${workspaceFolder}/../../../TDM-GCC/bin/gcc.exe",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-g3",
+                "${fileDirname}\\cng_rng.c",
+                "${fileDirname}\\big_int.c",
+                "-lbcrypt",
+                "-o",
+                "${fileDirname}\\output\\cng_rng.exe"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
