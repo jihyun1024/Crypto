@@ -18,8 +18,8 @@ void csprng_reseed(void);           // 주기적으로 엔트로피를 재수집
 
 // 난수 생성 함수
 void csprng_random_bytes(uint8_t *out, size_t out_len);             // bytes 단위로 난수 생성
-void csprng_random_bigint(BigInt *result, size_t bit_length);       // 지정된 비트 길이의 난수를 BigInt 기반으로 생성
-void csprng_random_bigint_mod(BigInt *result, const BigInt *mod);   // 지정된 모듈로 난수를 생성 (0 ~ mod-1 범위)
+void csprng_random_bigint(BigInt *out, size_t out_len);       // 지정된 비트 길이의 난수를 BigInt 기반으로 생성
+void csprng_random_bigint_mod(BigInt *out, const BigInt *mod);   // 지정된 모듈로 난수를 생성 (0 ~ mod-1 범위)
 
 
 #endif CSPRNG_H
