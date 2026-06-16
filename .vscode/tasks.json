@@ -9,9 +9,14 @@
                 "-Wall",
                 "-Wextra",
                 "-g3",
-                "${file}",
+                "${workspaceFolder}/Elliptic_Curve_Crypto/for_test.c",
+                "${workspaceFolder}/Elliptic_Curve_Crypto/core/sha256.c",
+                "${workspaceFolder}/Elliptic_Curve_Crypto/core/big_int.c",
+                "${workspaceFolder}/Elliptic_Curve_Crypto/core/secp256k1_params.c",
+                "${workspaceFolder}/Elliptic_Curve_Crypto/cryptography/csprng.c",
+                "${workspaceFolder}/Elliptic_Curve_Crypto/cryptography/ecc_point.c",
                 "-o",
-                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe"
+                "${workspaceFolder}/Elliptic_Curve_Crypto/output/for_test.exe"
             ],
             "group": {
                 "kind": "build",
@@ -44,6 +49,37 @@
             },
             "problemMatcher": [
                 "$gcc"
+            ]
+        },
+        {
+            "label": "C/C++ Compile Run: for_test (with Makefile)",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-C",
+                "${workspaceFolder}/Elliptic_Curve_Crypto"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "C/C++ Run: for_test",
+            "type": "shell",
+            "command": "${workspaceFolder}/Elliptic_Curve_Crypto/output/for_test.exe",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "dependsOn": [
+                "C/C++ Compile Run: for_test (with Makefile)"
             ]
         }
     ]

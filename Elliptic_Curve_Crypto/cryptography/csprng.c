@@ -105,11 +105,10 @@ void csprng_init(void) {
     memset(&csprng_state, 0, sizeof(CSPRNG_State));
     csprng_state.entropy_index = 0;
     csprng_state.reseed_count = 0;
+    csprng_initialized = 1;
     
     // 초기 엔트로피 수집
     csprng_collect_entropy();
-    
-    csprng_initialized = 1;
 }
 
 // CSPRNG 정리 및 메모리 해제
@@ -143,7 +142,7 @@ void csprng_seed_init(void) {
 // 엔트로피 수집 (/dev/urandom + 시스템 정보)
 void csprng_collect_entropy(void) {
     if (!csprng_initialized) {
-        csprng_init();
+        return;
     }
     
     uint8_t temp_buffer[ENTROPY_POOL_SIZE];

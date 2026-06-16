@@ -1,7 +1,7 @@
 #ifndef ECC_POINT_H
 #define ECC_POINT_H
 
-#include "big_int.h"
+#include "../core/big_int.h"
 
 // secp256k1 curve parameters
 // y^2 = x^3 + 7 (mod p)

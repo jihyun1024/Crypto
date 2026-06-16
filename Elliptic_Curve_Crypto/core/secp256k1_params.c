@@ -1,4 +1,4 @@
-#include "ecc_point.h"
+#include "../cryptography/ecc_point.h"
 #include "secp256k1_params.h"
 
 // secp256k1 parameter initialization (p, n, Gx, Gy를 한 번에 초기화)

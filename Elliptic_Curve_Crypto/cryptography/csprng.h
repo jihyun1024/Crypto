@@ -1,7 +1,7 @@
 #ifndef CSPRNG_H
 #define CSPRNG_H
 
-#include "big_int.h"
+#include "../core/big_int.h"
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
@@ -22,4 +22,4 @@ void csprng_random_bigint(BigInt *out, size_t out_len);       // 지정된 비�
 void csprng_random_bigint_mod(BigInt *out, const BigInt *mod);   // 지정된 모듈로 난수를 생성 (0 ~ mod-1 범위)
 
 
-#endif CSPRNG_H
+#endif
