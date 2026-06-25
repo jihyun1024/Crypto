@@ -3,7 +3,7 @@
 ```
 project/
 ├── for_test.c            # 전체 테스트 및 통합 실행부
-├── Makefile              # 컴파일 자동화 스크립트
+├── Makefile              
 │
 ├── core/                 # [1단계] 최하위 산술 연산
 │   ├── big_int.h / .c
@@ -11,9 +11,8 @@ project/
 │   └── sha256.h / .c     
 │
 ├── crypto/               # [2단계] 타원 곡선 수학
-│   ├── ecc_point.h / .c  
-│   ├── csprng.h / .c    
-|   └── cng_rng.h / .c   
+│   ├── ecc_point.h / .c    
+|   └── csprng.h / .c   
 │
 └── protocols/            # [3단계] 상위 암호 프로토콜
     ├── ecdsa.h / .c      
@@ -31,7 +30,6 @@ project/
     - ECDSA와 ECDH가 이 모듈을 공유
     - secp256k1 곡선에서의 연산 함수를 중심으로 구현
 - `csprng.h / .c`: 직접 구현한 난수 생성 기능
-- `cng_rng./ .c`: CNG(Cryptography Next Generation)을 이용한 난수 생성 (MSVC 환경에서만 동작)
 
 ## Protocol 계층
 - `ecdsa.h / .c`: ECDSA 알고리즘으로 서명 생성 및 검증 수행
@@ -42,8 +40,8 @@ project/
 
 ```
 // ecdh.h 예시
-#ifndef SECP256K1_ECDH_H
-#define SECP256K1_ECDH_H
+#ifndef SECP256K1_PARAMS_H
+#define SECP256K1_PARAMS_H
 
 #include "ecc_core.h"
 #include "sha256.h"
@@ -54,11 +52,13 @@ int ecdh_compute_key(uint8_t *out_key, const uint8_t *priv_key, const uint8_t *p
 #endif
 ```
 
-# 컴파일 및 관리 방법
-파일이 많아지면 매번 gcc로 하나씩 컴파일하기 어려우니, Makefile을 만들어 `make` 명령어 한 줄로 컴파일
-
-# 구현 및 실행 환경
+# 구현 환경
 - 언어: C/C++
 - IDE: Visual Studio Code
 - 컴파일러: GCC 10.3.0
 - Build Tool: Make
+
+# 실행 환경
+- 테스트 환경: WSL 2.6.3.0
+- 커널 버전: 6.6.87.2-1
+- WSLg 버전: 1.0.71
